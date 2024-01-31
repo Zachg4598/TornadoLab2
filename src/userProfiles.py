@@ -31,7 +31,6 @@ class UserProfileHandler(tornado.web.RequestHandler):
     def get(self, user_login):
         if user_login in UserProfiles:
             user_profile = UserProfiles[user_login]
-            self.render("profile.html", UserProfiles=UserProfiles, user_profile=user_profile)
+            self.render("profile.html", user_profile=user_profile, user_login=user_login)
         else:
             self.write("Login not found")
-#final version
