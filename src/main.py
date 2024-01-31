@@ -1,18 +1,25 @@
-import os
-import tornado.web
 import asyncio
+import tornado.web
+import Index
+import Quote
 from userProfiles import UserProfileHandler
 
 def makeApp():
+    endpoints=[
+        ("/",Index.Handler),
+        ("/quote",Quote.Handler)
+        (r"/profile/(\w+)",UserProfileHandler),
     endpoints = [
-        (r"/profile/(\w+)", UserProfileHandler),
-(r"/images/(.*)", tornado.web.StaticFileHandler, {"path": os.path.join(os.path.dirname(__file__), "../images")})
+        (r"/profile/(\w+)", UserProfileHandler),  
     ]
-    template_path = os.path.join(os.path.dirname(__file__), "../html")  
-    app = tornado.web.Application(endpoints, template_path=template_path)
+    app = tornado.web.Application(endpoints)
     app.listen(8000)
     return app
 
 if __name__ == "__main__":
     app = makeApp()
     asyncio.get_event_loop().run_forever()
+    asyncio.get_event_loop().run_forever()
+
+
+#final version
